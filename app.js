@@ -302,6 +302,9 @@
     }
     if (WebApp && WebApp.sendData) {
       WebApp.sendData(txt);
+    } else if (WebApp) {
+      // открыт НЕ клавиатурной web_app-кнопкой (меню/инлайн) — sendData недоступен
+      WebApp.showAlert('Откройте форму через кнопку «Заполнить отчёт» в чате (/start). Из меню Mini App отправить нельзя (лимит Telegram).');
     } else {
       // вне Telegram: копируем в буфер
       navigator.clipboard.writeText(txt).catch(function () {});
@@ -349,6 +352,10 @@
     if (!inTelegram) {
       var badge = $('modeBadge');
       if (badge) { badge.textContent = 'режим теста'; badge.classList.add('test'); }
+    } else {
+      // в Telegram используем родную MainButton, кастомную нижнюю скрываем
+      var sb = $('sendBtn');
+      if (sb) sb.style.display = 'none';
     }
     onFieldChange();
   }
