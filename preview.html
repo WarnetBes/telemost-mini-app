@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Отчёт смены · предпросмотр (без Telegram)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="notelb" style="font-size:13px;color:#b7791f;padding:8px 12px;border:1px dashed #b7791f;border-radius:8px;margin-bottom:10px;">
+      Предпросмотр вне Telegram. Кнопка снизу скопирует анкету в буфер.
+    </div>
+    <header class="top">
+      <div class="title"><h1>Отчёт смены</h1><div class="sub">БКСМН · кулинарное производство</div></div>
+      <span id="modeBadge" class="badge test">режим теста</span>
+    </header>
+    <section id="errorBox" class="error" hidden></section>
+    <form id="form" autocomplete="off">
+      <fieldset>
+        <legend>Смена</legend>
+        <div class="row">
+          <label>Цех<select id="цех" required><option value="C11">С11</option><option value="B18">В18-19</option></select></label>
+          <label>Дата<input id="дата" type="date" required></label>
+        </div>
+        <div class="row">
+          <label>Смена<select id="смена"><option>день</option><option>ночь</option></select></label>
+          <label>Часы<input id="часы" type="number" min="1" max="24" value="12"></label>
+        </div>
+        <div class="row">
+          <label>Брак (кг)<input id="брак" type="text" placeholder="3,9"></label>
+          <label>Замечания<input id="замечания" type="text" placeholder="нет"></label>
+        </div>
+      </fieldset>
+      <div id="участкиContainer"></div>
+      <button type="button" id="addУчасток" class="add">+ Добавить участок</button>
+      <fieldset id="пкFieldset">
+        <legend>Учёт готовой продукции (ПК)</legend>
+        <div class="row"><label>Заголовок<input id="пкЗаголовок" type="text" placeholder="охлаждение и перетарка"></label></div>
+        <div id="пкБлок"></div>
+        <div class="acts">
+          <button type="button" id="addПробито" class="add small">+ Пробито</button>
+          <button type="button" id="addЗаморозка" class="add small">+ Заморозка</button>
+        </div>
+        <div class="row" style="margin-top:8px"><label>Охлаждение (ФИО, статус)<input id="пкОхлаждение" type="text" placeholder="Тошев Джонибек (аутсорсинг)"></label></div>
+        <div class="row simple">
+          <label>Подготовка (мин)<input id="пкПодготовка" type="number" value="30"></label>
+          <label>Уборка (мин)<input id="пкУборка" type="number" value="30"></label>
+          <label>Обед (мин)<input id="пкОбед" type="number" value="60"></label>
+        </div>
+      </fieldset>
+      <fieldset id="составFieldset">
+        <legend>Состав смены</legend>
+        <div id="составБлок"></div>
+        <button type="button" id="addСостав" class="add">+ Состав</button>
+      </fieldset>
+      <div class="row simple"><label>Время работы цеха<input id="времяРаботы" type="text" placeholder="12 часов"></label></div>
+      <div id="htmlPreview" class="preview"><div class="ph">Предпросмотр анкеты</div><pre id="pre"></pre></div>
+    </form>
+    <div id="bottomBar"><button id="sendBtn" type="button" disabled>Скопировать анкету</button></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
